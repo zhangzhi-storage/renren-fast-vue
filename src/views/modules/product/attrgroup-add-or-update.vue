@@ -28,7 +28,8 @@
         <!-- <el-input v-model="dataForm.catelogId" placeholder="所属分类id"></el-input> @change="handleChange" -->
         <!-- <el-cascader filterable placeholder="试试搜索：手机" v-model="catelogPath" :options="categorys"  :props="props"></el-cascader> -->
         <!-- :catelogPath="catelogPath"自定义绑定的属性，可以给子组件传值 -->
-        <category-cascader :catelogPath.sync="catelogPath"></category-cascader>
+        <!-- <category-cascader :catelogPath.sync="catelogPath"></category-cascader> -->
+        <el-cascader v-model="dataForm.catelogIds" :options="categorys"  :props="props"></el-cascader>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -57,6 +58,7 @@ export default {
         sort: "",
         descript: "",
         icon: "",
+         catelogIds: [],
         catelogId: 0
       },
       dataRule: {
@@ -131,7 +133,8 @@ export default {
               sort: this.dataForm.sort,
               descript: this.dataForm.descript,
               icon: this.dataForm.icon,
-              catelogId: this.catelogPath[this.catelogPath.length-1]
+              // catelogId: this.catelogPath[this.catelogPath.length-1]
+              catelogId: this.dataForm.catelogIds[this.dataForm.catelogIds.length-1]
             })
           }).then(({ data }) => {
             if (data && data.code === 0) {
